@@ -1,0 +1,173 @@
+:root {
+  --asphalt: #1b2129;
+  --paper-bg: #dad7cc;
+  --paper: #eceae2;
+  --ink: #23262b;
+  --ink-faint: rgba(35, 38, 43, 0.5);
+  --amber: #ffb020;
+  --steel: #3e6680;
+  --green: #3e7c59;
+  --red: #b23a2e;
+  --font-display: 'Big Shoulders Display', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper-bg);
+}
+
+button {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  text-align: inherit;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  outline: none;
+  color: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-bottom-color: var(--amber) !important;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* Layout / Page */
+.page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex: 1;
+  padding: 24px 20px;
+}
+
+.muted {
+  color: var(--ink-faint);
+  font-family: var(--font-body);
+}
+
+.form-error {
+  color: var(--red);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  margin: 4px 0 12px;
+}
+
+/* Manifest-stub perforation, used on card-like surfaces */
+.stub-card {
+  position: relative;
+  background: var(--paper);
+  border-radius: 2px;
+  padding-left: 30px;
+}
+
+.stub-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  background-image: radial-gradient(circle at 8px 12px, var(--paper-bg) 4px, transparent 4.5px);
+  background-size: 16px 18px;
+  background-repeat: repeat-y;
+}
+
+/* Trip list / containers */
+.trip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Fleet Tab Component Styles */
+.fleet-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.fleet-tab {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-radius: 2px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.fleet-tab--active {
+  background: var(--asphalt);
+  color: var(--amber);
+}
+
+.fleet-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 16px 16px 30px;
+}
+
+.fleet-row__name {
+  flex: 1;
+  min-width: 140px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.fleet-row__plate {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  min-width: 90px;
+}
+
+.fleet-row__meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(35, 38, 43, 0.6);
+  min-width: 90px;
+}
+
+.status-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  padding: 3px 8px;
+}

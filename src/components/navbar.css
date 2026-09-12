@@ -1,0 +1,109 @@
+:root {
+  --asphalt: #1b2129;
+  --paper-bg: #dad7cc;
+  --paper: #eceae2;
+  --ink: #23262b;
+  --amber: #ffb020;
+  --steel: #3e6680;
+  --font-display: 'Big Shoulders Display', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--asphalt);
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topbar__left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+.topbar__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--paper);
+}
+
+.topbar__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.topbar__tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  padding: 7px 12px;
+  color: var(--paper);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.topbar__tab:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.topbar__tab--active {
+  background: var(--amber);
+  color: var(--asphalt);
+  font-weight: 700;
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar__badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--paper);
+  opacity: 0.9;
+}
+
+.topbar__logout {
+  background: none;
+  border: none;
+  color: var(--paper);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.topbar__logout:hover {
+  opacity: 0.8;
+}

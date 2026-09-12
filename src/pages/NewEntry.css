@@ -1,0 +1,202 @@
+:root {
+  --asphalt: #1b2129;
+  --paper-bg: #dad7cc;
+  --paper: #eceae2;
+  --ink: #23262b;
+  --ink-faint: rgba(35, 38, 43, 0.5);
+  --amber: #ffb020;
+  --steel: #3e6680;
+  --green: #3e7c59;
+  --red: #b23a2e;
+  --font-display: 'Big Shoulders Display', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper-bg);
+}
+
+/* Page Layout Wrapper */
+.page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-bg);
+}
+
+.page {
+  flex: 1;
+  padding: 24px 20px;
+}
+
+.page--centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 75%;
+}
+
+button {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  text-align: inherit;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  outline: none;
+  color: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-bottom-color: var(--amber) !important;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* Manifest-stub perforation */
+.stub-card {
+  position: relative;
+  background: var(--paper);
+  border-radius: 2px;
+  padding-left: 30px;
+}
+
+.stub-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  background-image: radial-gradient(circle at 8px 12px, var(--paper-bg) 4px, transparent 4.5px);
+  background-size: 16px 18px;
+  background-repeat: repeat-y;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--steel);
+}
+
+.field-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--steel);
+  margin-bottom: 3px;
+}
+
+.field-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(35, 38, 43, 0.2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 6px 0;
+  margin-bottom: 16px;
+}
+
+.field-input--static {
+  border-bottom: 2px solid rgba(35, 38, 43, 0.2);
+  padding: 6px 0;
+  margin-bottom: 16px;
+  color: var(--ink-faint);
+}
+
+textarea.field-input {
+  resize: none;
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: var(--asphalt);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 12px;
+  border-radius: 2px;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.form-error {
+  color: var(--red);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  margin: 4px 0 12px;
+}
+
+.success-msg {
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Entry form */
+.entry-card {
+  width: 100%;
+  max-width: 560px;
+  padding: 24px;
+  text-align: left;
+}
+
+.entry-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  margin: 4px 0 20px;
+  color: var(--ink);
+}
+
+.entry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.field-block {
+  margin-bottom: 16px;
+}

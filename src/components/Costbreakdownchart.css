@@ -1,0 +1,11 @@
+/* chart.css (additional or shared styles) */
+
+/* Note: .stub-card.chart-card, .chart-card--empty, .chart-card__title, 
+   .chart-tooltip, .chart-tooltip__date, .chart-tooltip__row, and 
+   .chart-tooltip__label are already defined in the previous block. 
+   You can append these specific additions if needed: */
+
+.chart-tooltip__row span:last-child {
+  font-weight: 500;
+  color: var(--text-primary, #fff);
+}

@@ -1,0 +1,102 @@
+/* Modal Overlay & Container */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 33, 41, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+  overflow-y: auto;
+}
+.modal {
+  width: 100%;
+  max-width: 440px;
+  padding: 24px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.modal__title {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 22px;
+  margin: 4px 0 0;
+}
+.modal__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Detail & Edit Grids */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+.entry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 4px;
+}
+.field-block {
+  margin-bottom: 16px;
+}
+
+/* Cost & Profit Boxes */
+.cost-box {
+  background: var(--paper-bg);
+  border-radius: 2px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+.cost-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(35, 38, 43, 0.7);
+  margin-bottom: 3px;
+}
+.cost-row--total {
+  border-top: 1px dashed rgba(35, 38, 43, 0.2);
+  margin-top: 6px;
+  padding-top: 6px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.profit-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--asphalt);
+  border-radius: 2px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgba(236, 234, 226, 0.6);
+}
+.profit-box__value {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--green);
+}
+.notes {
+  font-size: 13px;
+  color: rgba(35, 38, 43, 0.7);
+  margin-bottom: 16px;
+}

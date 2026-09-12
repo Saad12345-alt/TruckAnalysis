@@ -1,0 +1,25 @@
+:root {
+  --asphalt: #1b2129;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+.summary-tiles {
+  background: var(--asphalt);
+  border-radius: 2px;
+  padding: 16px;
+}
+
+.summary-tile__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(236, 234, 226, 0.55);
+  margin-bottom: 6px;
+}
+
+.summary-tile__value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+}

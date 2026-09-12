@@ -1,0 +1,89 @@
+/* Shared styles for the dashboard charts (TrendChart + CostBreakdownChart).
+   Both components import THIS file — repeated CSS imports are deduped by
+   Vite, so it only loads once no matter which chart mounts first.
+
+   .chart-panel used to be .chart-card and relied on the shared .stub-card
+   class (from Dashboard.css) for its background — that's exactly why it
+   rendered paper-colored instead of dark. Renamed and made fully
+   self-contained so it no longer shares a selector, or a specificity
+   fight, with .stub-card at all. Every other card on the dashboard stays
+   paper-colored via .stub-card; only these two panels are dark.
+
+   --chart-grid / --chart-axis / --chart-title are custom properties
+   scoped to .chart-panel. They're set once here and read inside the SVG
+   that recharts renders (CartesianGrid stroke, axis tick fill) via
+   var(--chart-grid) etc. in the .jsx files — CSS custom properties
+   inherit down the DOM tree, so anything rendered inside .chart-panel can
+   read them without re-declaring the actual color values in JS. */
+
+.chart-panel {
+  --chart-grid: rgba(255, 255, 255, 0.08);
+  --chart-axis-line: rgba(236, 234, 226, 0.2);
+  --chart-axis: rgba(236, 234, 226, 0.65);
+  --chart-title: rgba(236, 234, 226, 0.75);
+
+  background-color: var(--asphalt);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.chart-panel--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--chart-axis);
+  font-size: 14px;
+  min-height: 200px;
+}
+
+.chart-panel__title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  color: var(--chart-title);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* The tooltip was already a deliberate dark popover — var(--asphalt) and
+   var(--paper) were already real tokens, so this block is unchanged. */
+.chart-tooltip {
+  background-color: var(--asphalt);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+}
+
+.chart-tooltip__date {
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 4px;
+}
+
+.chart-tooltip__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.chart-tooltip__label {
+  font-weight: 500;
+  color: var(--paper);
+}
+
+.chart-tooltip__row span:last-child {
+  font-weight: 500;
+  color: var(--paper);
+}

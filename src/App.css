@@ -1,0 +1,32 @@
+/* The --asphalt/--paper-bg/--paper/--ink/--ink-faint/--amber/--steel/
+   --green/--red/--font-* variables used to be redeclared here identically
+   to index.css. Harmless today since the values matched, but two :root
+   blocks defining the same names in different files is a bug waiting to
+   happen the next time only one of them gets edited. index.css is the
+   single source for those now — this file keeps only the tokens that are
+   genuinely unique to it. */
+:root {
+  --dashboard-bg: #161b22;
+  --dashboard-panel: #efeae0;
+  --dashboard-border: rgba(35, 38, 43, 0.12);
+  --dashboard-muted: #6c7279;
+  --dashboard-red: #d76d64;
+  --dashboard-green: #3f7c59;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+button,
+input {
+  font: inherit;
+}

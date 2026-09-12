@@ -1,0 +1,61 @@
+:root {
+  --asphalt: #1b2129;
+  --paper-bg: #dad7cc;
+  --paper: #eceae2;
+  --ink: #23262b;
+  --ink-faint: rgba(35, 38, 43, 0.5);
+  --amber: #ffb020;
+  --steel: #3e6680;
+  --green: #3e7c59;
+  --red: #b23a2e;
+  --font-display: 'Big Shoulders Display', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper-bg);
+}
+
+button {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  text-align: inherit;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  outline: none;
+  color: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-bottom-color: var(--amber) !important;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}

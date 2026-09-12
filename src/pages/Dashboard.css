@@ -1,0 +1,230 @@
+.dashboard-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(255, 176, 32, 0.12), transparent 20%),
+    linear-gradient(180deg, #eceae2 0%, #eceae2 100%);
+}
+
+.dashboard-shell .page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.dashboard-shell .page--centered {
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-shell .stub-card {
+  background: rgba(236, 234, 226, 0.98);
+  border: 1px solid var(--dashboard-border);
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-shell .filter-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  align-items: end;
+  gap: 18px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+}
+
+.dashboard-shell .filter-bar .field-label {
+  margin-bottom: 8px;
+}
+
+.dashboard-shell .filter-bar .field-input {
+  width: 100%;
+  margin-bottom: 0;
+  border: none;
+  border-bottom: 2px solid rgba(35, 38, 43, 0.2);
+  background: transparent;
+}
+
+.dashboard-shell .filter-bar__search {
+  min-width: 0;
+}
+
+.dashboard-shell .search-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(35, 38, 43, 0.14);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 9px 12px;
+}
+
+.dashboard-shell .search-input svg {
+  color: var(--steel);
+  flex-shrink: 0;
+}
+
+.dashboard-shell .search-input input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+}
+
+.dashboard-shell .link-btn {
+  border: none;
+  background: transparent;
+  color: var(--steel);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  padding: 10px 0 0;
+  text-transform: uppercase;
+}
+
+.dashboard-shell .summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.dashboard-shell .summary-tile {
+  background: rgba(236, 234, 226, 0.96);
+  border: 1px solid rgba(35, 38, 43, 0.14);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-shell .summary-tile__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  color: var(--dashboard-muted);
+  text-transform: uppercase;
+}
+
+.dashboard-shell .summary-tile__value {
+  margin-top: 12px;
+  font-size: clamp(1.5rem, 2vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.dashboard-shell .form-error {
+  margin: 0 0 18px;
+  color: var(--dashboard-red);
+  font-size: 14px;
+}
+
+.dashboard-shell .muted {
+  color: rgba(236, 234, 226, 0.82);
+  font-size: 14px;
+  font-family: var(--font-body);
+}
+
+.dashboard-shell .trip-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.dashboard-shell .trip-card {
+  width: 100%;
+  border: 1px solid rgba(35, 38, 43, 0.14);
+  border-radius: 14px;
+  background: rgba(236, 234, 226, 0.97);
+  text-align: left;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.dashboard-shell .trip-card__top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dashboard-shell .trip-card__date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  color: var(--steel);
+  text-transform: uppercase;
+}
+
+.dashboard-shell .route {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.dashboard-shell .route-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  display: inline-block;
+}
+
+.dashboard-shell .route-place {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dashboard-shell .route-line {
+  flex: 1;
+  min-width: 12px;
+  border-top: 1px solid rgba(35, 38, 43, 0.25);
+}
+
+.dashboard-shell .trip-card__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 10px;
+  margin-top: 14px;
+}
+
+.dashboard-shell .mini-label {
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  color: var(--steel);
+  font-family: var(--font-mono);
+  margin-bottom: 4px;
+}
+
+.dashboard-shell .mini-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dashboard-shell .mini-value--red {
+  color: var(--dashboard-red);
+}
+
+.dashboard-shell .mini-value--green {
+  color: var(--dashboard-green);
+}
+
+.dashboard-shell .empty-state {
+  padding: 22px 20px;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+@media (max-width: 800px) {
+  .dashboard-shell .filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-shell .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
