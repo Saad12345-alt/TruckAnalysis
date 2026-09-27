@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './navbar.css';
-import { useAuth } from '../context/AuthContext';
+import { useAuth, TOKEN_KEY } from '../context/AuthContext';
+
 
 export default function NavBar() {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user, loading, logout } = useAuth();
   const role = user?.role?.toUpperCase();
 
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/login', { replace: true });
+    }
+  }, [loading, user, navigate]);
+  
   const tabs = [
     { label: 'Dashboard', to: '/dashboard' },
     { label: 'New Entry', to: '/new-entry' },
@@ -15,13 +22,17 @@ export default function NavBar() {
   ];
 
   const handleLogout = async () => {
-    try {
-      if (logout) await logout();
-    } finally {
-      localStorage.removeItem('token');
-      navigate('/');
-    }
-  };
+  try {
+    await logout();
+  } catch (err) {
+    console.error('Logout request failed:', err);
+  } finally {
+    localStorage.removeItem(TOKEN_KEY);
+    navigate('/login', { replace: true });
+  }
+};
+
+
 
   return (
     <div className="topbar">
