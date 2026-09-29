@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Login.css';
+
+type UserRole = 'admin' | 'driver';
 
 function Login() {
   const [email, setEmail] = useState<string>('');
@@ -19,22 +21,36 @@ function Login() {
     }
   }, [user, loading, navigate]);
 
-  const handleLogin = async (role: string) => {
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setPassword(event.target.value);
+  };
+
+  const handleLogin = async (role: UserRole): Promise<void> => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
     if (trimmedEmail === '' || trimmedPassword === '') {
-      return alert('Please enter both email and password');
+      alert('Please enter both email and password');
+      return;
     }
 
     try {
       // Goes through AuthContext now instead of calling api.post directly —
       // this is what actually updates `user` in context, which is what
       // NavBar (and anything else using useAuth()) depends on.
-      await login(trimmedEmail, trimmedPassword, role);
-      navigate('/dashboard', { replace: true });
-    } catch (e) {
-      alert(`An error occurred: ${e instanceof Error ? e.message : e}`);
+      if (role === 'admin' || role === 'driver') {
+        await login(trimmedEmail, trimmedPassword);
+        navigate('/dashboard', { replace: true });
+        return;
+      }
+
+      throw new Error('Unsupported role selected');
+    } catch (error: unknown) {
+      alert(`An error occurred: ${error instanceof Error ? error.message : String(error)}`);
     }
   };
 
@@ -55,7 +71,7 @@ function Login() {
           className="field-input"
           placeholder="admin"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
         />
 
         <label className="field-label" htmlFor="password">
@@ -67,13 +83,13 @@ function Login() {
           className="field-input"
           placeholder="????????"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
         />
 
-        <button className="btn-primary" onClick={() => handleLogin('admin')}>
+        <button className="btn-primary" onClick={() => void handleLogin('admin')}>
           LOG IN AS ADMIN
         </button>
-        <button className="btn-outline" onClick={() => handleLogin('driver')}>
+        <button className="btn-outline" onClick={() => void handleLogin('driver')}>
           LOG IN AS DRIVER
         </button>
 
