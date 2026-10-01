@@ -11,6 +11,7 @@ interface User {
   email: string | null;
   role: string;
   name: string | null;
+  driver_id?: number | null;
   iat?: number;
   exp?: number;
 }
