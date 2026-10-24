@@ -21,8 +21,13 @@ export default function TripDetailModal({ trip, role, onClose, onDeleted, onUpda
   const [form, setForm] = useState(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false); // approve / set-standard in flight
 
   if (!trip) return null;
+
+  // Only admins are ever sent review_status, so this is false for drivers.
+  const isAdmin = String(role).toUpperCase() === 'ADMIN';
+  const suspicious = isAdmin && trip.review_status === 'suspicious';
 
   // trip.cost is coming back undefined from the API (see chat) - default it so
   // the cost-breakdown rows below can't throw. Same idea for totalCost, which the
@@ -75,6 +80,30 @@ export default function TripDetailModal({ trip, role, onClose, onDeleted, onUpda
     }
   };
 
+  // Admin decision on a suspicious trip. 'approve' = the trip is fine, standard unchanged.
+  // 'set-standard' = this trip's distance and cost become the route's new standard.
+  const review = async (action) => {
+    if (
+      action === 'set-standard' &&
+      !window.confirm(
+        `Use this trip as the new standard for ${trip.origin} → ${trip.destination}?\n\n` +
+          `Future trips on this route will be compared to ${trip.distance} km / ${fmt(totalCost)}.`
+      )
+    ) {
+      return;
+    }
+    setBusy(true);
+    setError('');
+    try {
+      await api.put(`/trips/${trip.id}/${action}`, {});
+      onUpdated();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const handleDelete = () => {
     if (window.confirm('Delete this trip? This cannot be undone.')) onDeleted(trip.id);
   };
@@ -98,6 +127,22 @@ export default function TripDetailModal({ trip, role, onClose, onDeleted, onUpda
 
         {!editing ? (
           <>
+            {suspicious && (
+              <div className="flag-box">
+                <div className="flag-box__title">SUSPICIOUS TRIP</div>
+                {trip.flag_reason && <p className="flag-box__reason">{trip.flag_reason}</p>}
+                <div className="flag-box__actions">
+                  <button className="btn-outline" onClick={() => review('approve')} disabled={busy}>
+                    APPROVE
+                  </button>
+                  <button className="btn-outline" onClick={() => review('set-standard')} disabled={busy}>
+                    SET AS NEW STANDARD
+                  </button>
+                </div>
+                {error && <p className="form-error">{error}</p>}
+              </div>
+            )}
+
             <div className="detail-grid">
               <div>
                 <div className="field-label">DRIVER</div>
@@ -148,7 +193,7 @@ export default function TripDetailModal({ trip, role, onClose, onDeleted, onUpda
 
             {trip.notes && <p className="notes">{trip.notes}</p>}
 
-            {role === 'ADMIN' && (
+            {role === 'admin' && (
               <div className="modal__actions">
                 <button className="btn-outline" onClick={startEdit}>
                   <Pencil size={13} /> EDIT

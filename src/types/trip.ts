@@ -20,6 +20,8 @@ export interface Trip {
   notes?: string | null;
   driver?: { id: number | string; name: string } | null;
   vehicle?: { id: number | string; plate: string } | null;
+  review_status?: 'normal' | 'suspicious' | 'approved';
+  flag_reason?: string | null;
 }
 
 export interface TripTotals {
