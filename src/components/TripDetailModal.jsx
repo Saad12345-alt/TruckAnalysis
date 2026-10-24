@@ -195,14 +195,14 @@ export default function TripDetailModal({ trip, role, onClose, onDeleted, onUpda
 
             {role === 'admin' && (
               <div className="modal__actions">
-                <button className="btn-outline" onClick={startEdit}>
+                <button className="btn-outline btn-outline--amber" onClick={startEdit}>
                   <Pencil size={13} /> EDIT
-                </button>
-                <button className="btn-outline btn-outline--danger" onClick={handleDelete}>
-                  <Trash2 size={13} /> DELETE
-                </button>
-              </div>
-            )}
+                  </button>
+                  <button className="btn-outline btn-outline--danger" onClick={handleDelete}>
+                    <Trash2 size={13} /> DELETE
+                    </button>
+                    </div>
+                  )}
           </>
         ) : (
           <>
@@ -267,7 +267,7 @@ export default function TripDetailModal({ trip, role, onClose, onDeleted, onUpda
               <button className="btn-outline" onClick={() => setEditing(false)} disabled={saving}>
                 CANCEL
               </button>
-              <button className="btn-primary" onClick={save} disabled={saving} style={{ flex: 1 }}>
+              <button className="btn-primary savebtn" onClick={save} disabled={saving} style={{ flex: 1 }}>
                 {saving ? 'SAVING…' : 'SAVE'}
               </button>
             </div>

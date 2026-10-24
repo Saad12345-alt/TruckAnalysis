@@ -13,7 +13,7 @@ export default function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/fleet" element={<Fleet />} />
       <Route path="/new-entry" element={<NewEntry />} />
-      <Route path="/dashoard" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }
