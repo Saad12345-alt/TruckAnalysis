@@ -100,3 +100,30 @@
   color: rgba(35, 38, 43, 0.7);
   margin-bottom: 16px;
 }
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--steel);
+  color: var(--steel);
+  padding: 10px;
+}
+
+/* Amber/Yellow variant for Edit */
+.btn-outline.btn-outline--amber {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+.btn-outline.btn-outline--amber:hover {
+  background: rgba(255, 176, 32, 0.1);
+}
+
+/* Red variant for Delete */
+.btn-outline.btn-outline--danger {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.btn-outline.btn-outline--danger:hover {
+  background: rgba(178, 58, 46, 0.1); /* Uses your --red variable (#b23a2e) */
+}

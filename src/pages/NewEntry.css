@@ -200,3 +200,63 @@ textarea.field-input {
 .field-block {
   margin-bottom: 16px;
 }
+
+/* Paste at the bottom of NewEntry.css. Colours fall back to neutral values;
+   swap them for your theme variables if you like. */
+
+.ocr-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 4px 0 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed rgba(128, 128, 128, 0.45);
+}
+
+.ocr-upload__btn {
+  align-self: flex-start;
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: inherit;
+  background: transparent;
+  border: 1.5px solid currentColor;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ocr-upload__btn:hover:not(:disabled) {
+  background: rgba(128, 128, 128, 0.12);
+}
+
+.ocr-upload__btn:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.ocr-upload__hint {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.ocr-notice {
+  font-size: 0.8rem;
+  padding: 8px 10px;
+  border-left: 3px solid var(--accent, #d9a400);
+  background: rgba(217, 164, 0, 0.1);
+}
+
+.ocr-notice p {
+  margin: 0 0 4px;
+}
+
+.ocr-notice p:last-child {
+  margin-bottom: 0;
+}
+
+/* Fields filled in from a document: a marker until the user edits them */
+.field-input--auto {
+  border-color: var(--accent, #d9a400) !important;
+  background-color: rgba(217, 164, 0, 0.1);
+}

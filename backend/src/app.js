@@ -6,6 +6,7 @@ import authRoutes from './routes/authRoutes.js';
 import tripRoutes from './routes/tripRoutes.js';
 import driverRoutes from './routes/driverRoutes.js';
 import vehicleRoutes from './routes/vehicleRoutes.js';
+import ocrRoutes from './routes/orcRoutes.js';
 
 const app = express();
 
@@ -28,5 +29,7 @@ app.use('/drivers', driverRoutes);
 app.use('/api/drivers', driverRoutes);
 app.use('/vehicles', vehicleRoutes);
 app.use('/api/vehicles', vehicleRoutes);
+app.use('/ocr', ocrRoutes);
+app.use('/api/ocr', ocrRoutes);
 
 export default app;
