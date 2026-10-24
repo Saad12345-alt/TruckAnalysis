@@ -27,6 +27,41 @@
   color: var(--steel);
 }
 
+/* Suspicious trip: red, diagonal stripes. Only admins ever receive review_status. */
+.trip-card.trip-card--suspicious {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(215, 109, 100, 0.26) 0 8px,
+      rgba(215, 109, 100, 0.08) 8px 16px
+    ),
+    var(--paper-bg, #f4f1e8);
+  border-left: 4px solid var(--red);
+}
+.trip-card__flag {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.trip-card__badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  background: var(--red);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.trip-card__reason {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #8f332b;
+}
+
 /* Route visuals */
 .route {
   display: flex;

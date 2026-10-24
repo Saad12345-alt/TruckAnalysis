@@ -18,8 +18,15 @@ export default function Dashboard() {
   const [to, setTo] = useState('');
   const [location, setLocation] = useState('');
   const [selected, setSelected] = useState<Trip | null>(null);
+  const [onlySuspicious, setOnlySuspicious] = useState(false);
 
   const { trips, totals, loading, error, refetch } = useTrips({ from, to, location });
+
+  // Only admins are sent review_status, so the filter button is admin-only.
+  const role = user?.role || 'ADMIN';
+  const isAdmin = String(role).toUpperCase() === 'ADMIN';
+  const suspiciousCount = trips.filter((t) => t.review_status === 'suspicious').length;
+  const visibleTrips = onlySuspicious ? trips.filter((t) => t.review_status === 'suspicious') : trips;
 
   const clearFilters = () => {
     setFrom('');
@@ -74,22 +81,39 @@ export default function Dashboard() {
           <CostBreakdownChart trips={trips} />
         </div>
 
+        {isAdmin && (
+          <div className="list-toolbar">
+            <button
+              type="button"
+              className={`suspicious-chip${onlySuspicious ? ' suspicious-chip--on' : ''}`}
+              aria-pressed={onlySuspicious}
+              onClick={() => setOnlySuspicious((on) => !on)}
+            >
+              SUSPICIOUS ({suspiciousCount})
+            </button>
+          </div>
+        )}
+
         {error && <p className="form-error">{error}</p>}
 
         {loading ? (
           <p className="muted">Loading trips…</p>
         ) : (
           <div className="trip-list">
-            {trips.map((t) => (
+            {visibleTrips.map((t) => (
               <TripCard key={t.id} trip={t} onClick={() => setSelected(t)} />
             ))}
-            {trips.length === 0 && (
-              <div className="stub-card empty-state">No trips match this filter. Adjust the range or clear it.</div>
+            {visibleTrips.length === 0 && (
+              <div className="stub-card empty-state">
+                {onlySuspicious && trips.length > 0
+                  ? 'No suspicious trips in this range. Nice and clean.'
+                  : 'No trips match this filter. Adjust the range or clear it.'}
+              </div>
             )}
           </div>
         )}
 
-        <TripDetailModal trip={selected} role={user?.role || 'ADMIN'} onClose={() => setSelected(null)} onDeleted={handleDeleted} onUpdated={handleUpdated} />
+        <TripDetailModal trip={selected} role={role} onClose={() => setSelected(null)} onDeleted={handleDeleted} onUpdated={handleUpdated} />
       </div>
     </div>
   );

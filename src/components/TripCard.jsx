@@ -5,8 +5,17 @@ import './TripCard.css';
 const fmt = (n) => 'Rs ' + Math.round(n || 0).toLocaleString('en-US');
 
 export default function TripCard({ trip, onClick }) {
+  // The backend only sends review_status to admins, so drivers never see the red card.
+  const suspicious = trip.review_status === 'suspicious';
+
   return (
-    <button className="stub-card trip-card" onClick={onClick}>
+    <button className={`stub-card trip-card${suspicious ? ' trip-card--suspicious' : ''}`} onClick={onClick}>
+      {suspicious && (
+        <div className="trip-card__flag">
+          <span className="trip-card__badge">SUSPICIOUS</span>
+          {trip.flag_reason && <span className="trip-card__reason">{trip.flag_reason}</span>}
+        </div>
+      )}
       <div className="trip-card__top">
         <div className="trip-card__date">
           {new Date(trip.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}

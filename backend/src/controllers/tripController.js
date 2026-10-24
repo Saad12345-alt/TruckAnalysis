@@ -1,5 +1,7 @@
 import Trip from '../models/tripModel.js';
 import pool from '../config/db.js';
+import { reviewNewTrip, reviewEditedTrip } from '../models/routeStandardModel.js';
+import { hideReview, isAdmin } from '../utils/tripReview.js';
 
 export const getTrips = async (req, res) => {
   try {
@@ -8,7 +10,8 @@ export const getTrips = async (req, res) => {
     // in-memory data) — no need to re-derive totals here.
     const { trips, totals } = await Trip.findTrips(req.query);
 
-    return res.json({ trips, totals });
+    // Only admins see which trips are suspicious (and why).
+    return res.json({ trips: isAdmin(req) ? trips : trips.map(hideReview), totals });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -22,7 +25,7 @@ export const getTripById = async (req, res) => {
       return res.status(404).json({ message: 'Trip not found' });
     }
 
-    return res.json(trip);
+    return res.json(isAdmin(req) ? trip : hideReview(trip));
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -84,8 +87,18 @@ export const createTrip = async (req, res) => {
       body.driver_id = driverRes.rows[0].id;
     }
 
-    const newTrip = await Trip.create(body);
-    return res.status(201).json(newTrip);
+    let newTrip = await Trip.create(body);
+
+    // First trip on a route becomes its standard; later ones are compared to it.
+    // A problem here must never stop the trip from being saved.
+    try {
+      await reviewNewTrip(newTrip.id);
+      newTrip = (await Trip.findById(newTrip.id)) || newTrip;
+    } catch (reviewError) {
+      console.error('Trip review error:', reviewError);
+    }
+
+    return res.status(201).json(isAdmin(req) ? newTrip : hideReview(newTrip));
   } catch (error) {
     console.error("Trip creation error:", error);
     return res.status(500).json({ message: error.message });
@@ -95,13 +108,21 @@ export const createTrip = async (req, res) => {
 
 export const updateTrip = async (req, res) => {
   try {
-    const updatedTrip = await Trip.update(req.params.id, req.body);
+    let updatedTrip = await Trip.update(req.params.id, req.body);
 
     if (!updatedTrip) {
       return res.status(404).json({ message: 'Trip not found' });
     }
 
-    return res.json(updatedTrip);
+    // The numbers changed, so check the trip again (never blocks the edit).
+    try {
+      await reviewEditedTrip(updatedTrip.id);
+      updatedTrip = (await Trip.findById(updatedTrip.id)) || updatedTrip;
+    } catch (reviewError) {
+      console.error('Trip review error:', reviewError);
+    }
+
+    return res.json(isAdmin(req) ? updatedTrip : hideReview(updatedTrip));
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

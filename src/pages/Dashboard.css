@@ -129,8 +129,13 @@
 
 .dashboard-shell .trip-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
   gap: 16px;
+}
+@media (max-width: 900px) {
+  .dashboard-shell .trip-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .dashboard-shell .trip-card {
@@ -227,4 +232,30 @@
   .dashboard-shell .summary-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Add this to the bottom of Dashboard.css — the SUSPICIOUS (N) filter button */
+.list-toolbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+.suspicious-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 7px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  color: #8f332b;
+  background: rgba(215, 109, 100, 0.12);
+  border: 1px solid var(--red);
+}
+.suspicious-chip:hover {
+  background: rgba(215, 109, 100, 0.22);
+}
+.suspicious-chip--on {
+  color: #fff;
+  background: var(--red);
 }
